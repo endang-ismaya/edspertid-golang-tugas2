@@ -7,6 +7,12 @@ import (
 	"strings"
 )
 
+const (
+	mnuProgram1 = "1. Program Palindrome"
+	mnuProgram2 = "2. Program Menentukan Vokal atau Konsonan"
+	mnuExit     = "3. Exit Program"
+)
+
 func main() {
 	showTheTaskMenu()
 }
@@ -21,9 +27,9 @@ func showTheTaskMenu() {
 	fmt.Println("Tugas Pertemuan Ke-1")
 	fmt.Println("=======================================")
 	fmt.Println("")
-	fmt.Println("1. Program Palindrome")
-	fmt.Println("2. Program Menentukan Vokal atau Konsonan")
-	fmt.Println("3. Exit Program")
+	fmt.Println(mnuProgram1)
+	fmt.Println(mnuProgram2)
+	fmt.Println(mnuExit)
 	fmt.Println("")
 	fmt.Println("Pilih program 1/2/3:")
 
@@ -35,7 +41,7 @@ func showTheTaskMenu() {
 		case "1":
 			palindromeMenu()
 		case "2":
-			fmt.Println("Anda telah memilih no. 2")
+			vokalKonsonanMenu()
 		case "3":
 			fmt.Println("Terima Kasih, sampai jumpa kembali di program ini :)")
 			os.Exit(0)
@@ -55,8 +61,7 @@ func palindromeMenu() {
 	reader := bufio.NewReader(os.Stdin)
 
 	fmt.Println("\n\n=======================================")
-	fmt.Println("Edspert.id Bootcamp Backend Dev with GO")
-	fmt.Println("1. Program Palindrome")
+	fmt.Println(mnuProgram1)
 	fmt.Println("=======================================")
 
 	fmt.Println("Silahkan masukkan kata:")
@@ -66,6 +71,25 @@ func palindromeMenu() {
 
 	fmt.Printf("\nInput: %s\n", answer)
 	fmt.Printf("Is Palindrome: %t\n\n", isPal)
+
+	showTheTaskMenu()
+}
+
+func vokalKonsonanMenu() {
+	// create our reader variable, which reads input from standard in (the keyboard)
+	reader := bufio.NewReader(os.Stdin)
+
+	fmt.Println("\n\n==========================================")
+	fmt.Println(mnuProgram2)
+	fmt.Println("==========================================")
+
+	fmt.Println("Silahkan masukkan Huruf:")
+	answer, _ := reader.ReadString('\n')
+	answer = removeNewlineChar(answer)
+	isVokOrKons := isVokalKonsonan(answer)
+
+	fmt.Printf("\nInput: %s\n", answer)
+	fmt.Printf("Jenis Huruf: %s\n\n", isVokOrKons)
 
 	showTheTaskMenu()
 }
@@ -82,6 +106,15 @@ func isPalindrome(str string) bool {
 		}
 	}
 	return true
+}
+
+func isVokalKonsonan(character string) string {
+	switch character {
+	case "a", "e", "i", "o", "u", "A", "E", "I", "O", "U":
+		return "Vokal"
+	default:
+		return "Konsonan"
+	}
 }
 
 func removeNewlineChar(input string) string {
