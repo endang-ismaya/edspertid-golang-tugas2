@@ -4,6 +4,18 @@ import (
 	"testing"
 )
 
+func BenchmarkIsVokalKonsonan(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		isVokalKonsonan("a")
+	}
+}
+
+func BenchmarkIsPalindrome(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		isPalindrome("madam")
+	}
+}
+
 func Test_isPalindrome(t *testing.T) {
 	type args struct {
 		str string
