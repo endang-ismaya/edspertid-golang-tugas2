@@ -41,16 +41,18 @@ func TestStudentService_GetStudent(t *testing.T) {
 			want:    []Student{},
 		},
 		{
-			name: "Case 2: Get All Students success but with data",
+			name: "Case 3: Get All Students success but with data",
 			fields: fields{
 				StudentRepositoryInterface: &StudentRepositoryInterfaceMock{
 					GetAllStudentsFunc: func() ([]Student, error) {
-						return []Student{}, nil
+						return []Student{
+							{FullName: "Endang", Grade: "A", Class: 3},
+						}, nil
 					},
 				},
 			},
 			wantErr: false,
-			want:    []Student{},
+			want:    []Student{{FullName: "Endang", Grade: "A", Class: 3}},
 		},
 	}
 	for _, tt := range tests {
